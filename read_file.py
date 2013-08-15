@@ -33,7 +33,8 @@ def cat_bytes(filename):
     
     f.close()
   except IOError:
-    print 'IO Error', filename
+    # print 'IO Error', filename
+    raise ValueError("couldn't open " + filename)
     
 def cat_unicode(filename):
   """Read unicode file"""
@@ -54,7 +55,8 @@ def cat_unicode(filename):
     
     f.close()
   except IOError:
-    print 'IO Error', filename
+    # print 'IO Error', filename
+    raise ValueError("couldn't open " + filename)
     
 def main():
   for arg in sys.argv[1:]:
