@@ -384,7 +384,8 @@ def plot_virusPop(resistances, delays, lag, naturalRun, drugs, makePlot=False):
     viruses = [ResistantVirus(maxBirthProb, clearProb, resistances, mutProb) for i in range(100)]
     patient = Patient(viruses, 1000)
     ## plot
-    xVals = range(1+delays+lag+naturalRun); totPop = [patient.getTotalPop()]; resistPop = [patient.getResistPop(drugs)]
+    xVals = range(1+delays+lag+naturalRun); totPop = [patient.getTotalPop()]; 
+    resistPop = [patient.getResistPop(drugs)]
     ## initially, let viruses grow/die organically
     for i in range(delays):
         totPop.append(patient.update())
@@ -406,9 +407,12 @@ def plot_virusPop(resistances, delays, lag, naturalRun, drugs, makePlot=False):
         pylab.plot(xVals, totPop, 'yo', label='total pop.')
         pylab.plot(xVals, resistPop, 'rx', label='drug resistant pop.')
         if len(drugs) == 1:
-            pylab.title('virus population: %d timesteps, treated by %s, \nanother %d timesteps' %(delays, drugs[0], naturalRun))
+            pylab.title('virus population: %d timesteps, treated by %s,\
+                        \nanother %d timesteps' %(delays, drugs[0], naturalRun))
         if len(drugs) == 2:
-            pylab.title('virus population: %d timesteps, treated by %s, \nanother %d timesteps, treated by %s, another %d timesteps' %(delays, drugs[0], lag, drugs[1], naturalRun))
+            pylab.title('virus population: %d timesteps, treated by %s,\nanother\
+                        %d timesteps, treated by %s, another %d timesteps'\
+                        %(delays, drugs[0], lag, drugs[1], naturalRun))
         pylab.xlabel('time steps')
         pylab.ylabel('population')
         pylab.legend(loc='best', numpoints=1)
@@ -422,11 +426,14 @@ def hist(num_of_trials, resistances, delays, lag, naturalRun, drugs):
         finalVirusPop.append(plot_virusPop(resistances, delays, lag, naturalRun, drugs))
     pylab.figure()
     pylab.hist(finalVirusPop)
-    pylab.title('distribution of final virus population, \ndelay: %d timesteps, lag: %d timesteps, finalRun: %d timesteps' %(delays, lag, naturalRun))
+    pylab.title('distribution of final virus population, \ndelay: %d timesteps,\
+                lag: %d timesteps, finalRun: %d timesteps'\
+                %(delays, lag, naturalRun))
     pylab.xlabel('final virus population')
     pylab.ylabel('num of patients')
     pct_cured = len([val for val in finalVirusPop if val <= 50]) * 1.0 / len(finalVirusPop)
-    print 'delays: %d timesteps,'%delays, 'lag: %d timesteps,'%lag, 'naturalRun: %d timesteps,'%naturalRun, 'pct of patient cured: %f'%pct_cured
+    print 'delays: %d timesteps,'%delays, 'lag: %d timesteps,'%lag, \
+          'naturalRun: %d timesteps,'%naturalRun, 'pct of patient cured: %f'%pct_cured
 
 #
 # PROBLEM 4
@@ -633,10 +640,10 @@ if __name__ == '__main__':
     # f(0.9, 10000) # 0.9002
     # test_SimpleVirus()
     # test_SimplePatient()
-    # problem2()
+    problem2()
     # test_Patient()
-    # problem4()
-    # problem5()
-    # problem6()
+    problem4()
+    problem5()
+    problem6()
     problem7()
     pylab.show()
