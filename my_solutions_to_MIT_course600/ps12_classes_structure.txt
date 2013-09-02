@@ -1,0 +1,17 @@
+SimpleVirus(object): __init__(self, maxBirthProb, clearProb)
+  doesClear(self) returns True or False
+  reproduce(self, popDensity) returns an offspring of type SimpleVirus or raises NoChildException
+
+SimplePatient(object): __init__(self, viruses, maxPop)
+  getTotalPop(self) returns The total virus population (an integer)  
+  update(self): returns the total virus population at the end of the update (an integer)
+  
+ResistantVirus(SimpleVirus): __init__(self, maxBirthProb, clearProb, resistances, mutProb)
+  getResistance(self, drug) returns True if this virus instance is resistant to the drug, False otherwise.
+  reproduce(self, popDensity, activeDrugs) returns an offspring of type SimpleVirus or raises NoChildException
+  
+Patient(SimplePatient): __init__(self, viruses, maxPop)
+  addPrescription(self, newDrug)
+  getPrescriptions(self) returns The list of drug names (strings) being administered to this patient.
+  getResistPop(self, drugResist) returns the population of viruses (an integer) with resistances to all drugs in the drugResist list.
+  update(self) returns the total virus population at the end of the update (an integer)

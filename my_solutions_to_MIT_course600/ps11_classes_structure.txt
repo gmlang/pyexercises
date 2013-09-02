@@ -1,0 +1,24 @@
+Position(object): __init__(self, x, y)
+  getX(self)
+  getY(self)
+  getNewPosition(self, angle, speed)
+  
+RectangularRoom(object): __init__(self, width, height)
+  cleanTileAtPosition(self, pos)
+  isTileCleaned(self, m, n)
+  getNumTiles(self)
+  getNumCleanedTiles(self)
+  getRandomPosition(self)
+  isPositionInRoom(self, pos)  
+  
+BaseRobot(object): __init__(self, room, speed)
+  getRobotPosition(self)
+  getRobotDirection(self)
+  setRobotPosition(self, position)
+  setRobotDirection(self, direction)  
+  
+Robot(BaseRobot):
+  updatePositionAndClean(self)  
+  
+RandomWalkRobot(BaseRobot):
+  updatePositionAndClean(self)  
