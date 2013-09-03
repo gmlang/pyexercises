@@ -1,19 +1,26 @@
+import random        
+
 def find_defining_class(obj, meth_name):
-    """obj: any object
-       meth_name: string
-       returns the class that provides the definition of the method
+    """returns the class that provides the definition of the method.
+    
+    obj: any object
+    meth_name: string
+    
     """
     for ty in type(obj).mro():
         if meth_name in ty.__dict__:
             return ty
 
+            
 class Card(object):
     """Represents a standard playing card.
-       Map the following 4 suits to numbers:
-       Spades -> 3
-       Hearts -> 2
-       Diamonds -> 1
-       Clubs -> 0
+    
+    Map the following 4 suits to numbers:
+    Spades -> 3
+    Hearts -> 2
+    Diamonds -> 1
+    Clubs -> 0
+    
     """
     suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
     rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 
@@ -41,8 +48,9 @@ class Card(object):
         t2 = other.suit, other.rank
         return cmp(t1, t2)
 
-import random        
+
 class Deck(object):
+    """represent a deck of cards"""
     def __init__(self):
         self.cards = []
         for suit in range(4):
@@ -72,7 +80,8 @@ class Deck(object):
             self.move_cards(hand, cards_per_hand)
             hands.append(hand)
         return hands
-        
+
+
 class Hand(Deck):
     """Represents a hand of playing cards."""
     def __init__(self, label=''):
@@ -80,6 +89,7 @@ class Hand(Deck):
         self.label = label
     def get_label(self):
         return self.label
+
         
 if __name__ == '__main__':
     # card1 = Card(2, 11)

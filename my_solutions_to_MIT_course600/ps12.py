@@ -147,26 +147,27 @@ def problem2():
         yVals.append(patient.update())
     print yVals    
     pylab.plot(xVals, yVals, 'bo', label='virus population')
-    pylab.axvline(x=125,color='k',ls='dashed') # add a vertical black dashed line at x=120
-    pylab.axhline(y=500,color='k',ls='dashed') # add a horizontal black dashed line at y=500
+    # add a vertical black dashed line at x=120
+    pylab.axvline(x=125,color='k',ls='dashed')
+    # add a horizontal black dashed line at y=500    
+    pylab.axhline(y=500,color='k',ls='dashed') 
     pylab.title('virus population over time')
     pylab.xlabel('time steps')
     pylab.ylabel('virus population')
     pylab.legend(loc='best', numpoints=1)
-    # pylab.show() # the plot shows an increasing trend that levels off and flactuate around virus population of 500 
+    # pylab.show() # the plot shows an increasing trend that levels off and 
+                   # flactuate around virus population of 500 
+                   
 #
 # PROBLEM 3
 #
 
 class ResistantVirus(SimpleVirus):
-    """
-    Representation of a virus which can have drug resistance.
-    """    
+    """Representation of a virus which can have drug resistance."""    
     
     def __init__(self, maxBirthProb, clearProb, resistances, mutProb):
-        """
-        Initialize a ResistantVirus instance, saves all parameters as attributes
-        of the instance.
+        """Initialize a ResistantVirus instance, saves all parameters as 
+        attributes of the instance.
         
         maxBirthProb: Maximum reproduction probability (a float between 0-1)        
         
@@ -245,7 +246,8 @@ class ResistantVirus(SimpleVirus):
                 # if self.getResistance(drug):
                     # reproduce = True
                     # break
-        ## v2, logic is correct: a virus always reproduces unless there's at least one drug such that self.getResistance(drug)==False
+        ## v2, logic is correct: a virus always reproduces unless there's at 
+        ## least one drug such that self.getResistance(drug)==False
         reproduce = True
         for drug in activeDrugs:
             if not self.getResistance(drug):
@@ -271,7 +273,8 @@ class ResistantVirus(SimpleVirus):
                     # print 'children resistant: ', offspring_resistances[drug] # comment off when running test_Patient()
                 else: offspring_resistances[drug] = self.resistances[drug]            
                 
-            return ResistantVirus(self.maxBirthProb, self.clearProb, offspring_resistances, self.mutProb)
+            return ResistantVirus(self.maxBirthProb, self.clearProb, 
+                                  offspring_resistances, self.mutProb)
         else:
             raise NoChildException("NoChildException")
 

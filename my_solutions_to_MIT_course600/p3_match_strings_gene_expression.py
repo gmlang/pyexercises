@@ -27,12 +27,14 @@ def subStringMatchExact(target, key):
         
 
 def constrainedMatchPair(firstMatch, secondMatch, length):
-    """Input: a tuple representing starting points for the first substring, 
-              a tuple representing starting points for the second substring, 
-              and the length of the first substring
-       Return: a tuple of all members (call it n) of the first tuple for which 
-               there is an element in the second tuple (call it k) such that 
-               n+m+1 = k, where m is the length of the first substring              
+    """Return a tuple of all members (call it n) of the first tuple for which 
+    there is an element in the second tuple (call it k) such that n+m+1 = k, 
+    where m is the length of the first substring.
+
+    Input: a tuple representing starting points for the first substring, 
+           a tuple representing starting points for the second substring, 
+           the length of the first substring.
+           
     """
     results = ()
     for n in firstMatch:
@@ -161,11 +163,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-            
-
-
-

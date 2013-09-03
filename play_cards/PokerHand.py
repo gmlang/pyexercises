@@ -1,25 +1,30 @@
 from Card import *
 
 class PokerHand(Hand):
+    """represent a poker hand"""
     def suit_hist(self):
-        """Builds a histogram of the suits that appear in the hand.
-        Stores the result in attribute suits.
+        """Builds a histogram of the suits that appear in the hand. Stores the 
+        result in attribute suits.
+        
         """
         self.suits = {}
         for card in self.cards:
             self.suits[card.suit] = self.suits.get(card.suit, 0) + 1
     
     def rank_hist(self):
-        """Builds a histogram of the ranks that appear in the hand.
-        Stores the result in attribute ranks.
+        """Builds a histogram of the ranks that appear in the hand. Stores the 
+        result in attribute ranks.
+        
         """
         self.ranks = {}
         for card in self.cards:
             self.ranks[card.rank] = self.ranks.get(card.rank, 0) +1
             
     def has_pair(self):
-        """Returns True if the hand has a pair, False otherwise.
-        Note that this works correctly for hands with 2 or more cards.
+        """Returns True if the hand has a pair, False otherwise. 
+        
+        Works correctly for hands with 2 or more cards.
+        
         """
         self.rank_hist()
         for val in self.ranks.values():
@@ -29,7 +34,9 @@ class PokerHand(Hand):
         
     def has_twopair(self):
         """Returns True if the hand has two pairs, False otherwise.
-        Note that this works correctly for hands with 4 or more cards.
+        
+        Works correctly for hands with 4 or more cards.
+        
         """
         self.rank_hist()
         count_pairs = 0
@@ -41,8 +48,11 @@ class PokerHand(Hand):
         return False
     
     def has_threeOfaKind(self):
-        """Returns True if the hand has three cards with the same rank, False otherwise.
-        Note that this works correctly for hands with 3 or more cards
+        """Returns True if the hand has three cards with the same rank, and
+        False otherwise.
+        
+        Works correctly for hands with 3 or more cards
+        
         """
         self.rank_hist()
         for val in self.ranks.values():
@@ -52,9 +62,13 @@ class PokerHand(Hand):
         
     def has_straight(self):
         """Returns True if the hand has a straight, False otherwise.
-        Note that a straight is 5 cards with ranks in sequence (aces can be high or low, so
-        Ace-2-3-4-5 is a straight and so is 10-Jack-Queen-King-Ace, but Queen-King-Ace-2-3 is not.)
-        Alos note that this works correctly for hands with 5 or more cards
+        
+        A straight is 5 cards with ranks in sequence (aces can be high or low, 
+        so Ace-2-3-4-5 is a straight and so is 10-Jack-Queen-King-Ace, but 
+        Queen-King-Ace-2-3 is not.) 
+        
+        Works correctly for hands with 5 or more cards
+        
         """
         self.rank_hist()
         sorted_ranks = sorted(self.ranks.keys())
@@ -75,7 +89,9 @@ class PokerHand(Hand):
         
     def has_flush(self):
         """Returns True if the hand has a flush, False otherwise.
-        Note that this works correctly for hands with 5 or more cards.
+        
+        Works correctly for hands with 5 or more cards.
+        
         """
         self.suit_hist()
         for val in self.suits.values():
@@ -85,14 +101,20 @@ class PokerHand(Hand):
     
     def has_fullhouse(self):
         """Returns True if the hand has a full house, False otherwise.
-        Note that a full house has 3 cards with one rank and 2 cards with another.
-        So this works correctly for hands with 5 or more cards.
+        
+        A full house has 3 cards with one rank and 2 cards with another.
+        
+        Works correctly for hands with 5 or more cards.
+        
         """
         return self.has_threeOfaKind() and self.has_pair()
       
     def has_fourOfaKind(self):
-        """Returns True if the hand has four cards with the same rank, False otherwise.
-        Note that this works correctly for hands with 4 or more cards.
+        """Returns True if the hand has four cards with the same rank, and 
+        False otherwise.
+        
+        Works correctly for hands with 4 or more cards.
+        
         """
         self.rank_hist()
         for val in self.ranks.values():
@@ -102,12 +124,14 @@ class PokerHand(Hand):
         
     def has_straightFlush(self):
         """Returns True if the hand has a straight flush, False otherwise.
-        Note that this works correctly for hands with 5 or more cards
+        
+        Works correctly for hands with 5 or more cards
+        
         """
         return self.has_straight() and self.has_flush()
     
     def classify(self):
-        """find the highest-value classification for a hand and sets the label
+        """Finds the highest-value classification for a hand and sets the label
         attribute accordingly"""
         highest = 'normal'
         if self.has_pair():
@@ -134,10 +158,13 @@ def check_has_straight():
     print hand.has_straight()
         
 def probs_of_classifications(deck, classification = {}):
-    """deck: Deck
-       shuffles a deck of cards, divides it into hands, classifies the hands,
-       and counts the number of times various classifications appear.
-       returns a dictionary of classifications as keys and their counts as values.
+    """shuffles a deck of cards, divides it into hands, classifies the hands,
+    and counts the number of times various classifications appear.
+    
+    deck: Deck
+    
+    returns a dictionary of classifications as keys and their counts as values.
+    
     """
     # shuffle the deck
     deck.shuffle()
@@ -147,7 +174,8 @@ def probs_of_classifications(deck, classification = {}):
         deck.move_cards(hand, 5)
         hand.sort()
         hand.classify()
-        classification[hand.get_label()] = classification.get(hand.get_label(), 0) + 1
+        classification[hand.get_label()] = \
+            classification.get(hand.get_label(), 0) + 1
     return classification
 
     
@@ -184,5 +212,7 @@ if __name__ == '__main__':
         classification = probs_of_classifications(deck, classification)    
     print 'classification\t\tprobability'
     for key in sorted(classification, key=classification.get):
-        print str(key) + '\t\t\t' + str(classification[key] * 100.0 / (N * 10)) + '%'
-    print 'sum\t\t\t' + str(sum(classification.values()) * 100.0 / (N * 10)) + '%'
+        print str(key) + '\t\t\t' +\
+              str(classification[key] * 100.0 / (N * 10)) + '%'
+    print 'sum\t\t\t' +\
+          str(sum(classification.values()) * 100.0 / (N * 10))+ '%'

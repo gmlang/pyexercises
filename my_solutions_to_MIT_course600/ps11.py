@@ -246,7 +246,8 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     results = []
     for i in xrange(num_trials):
         if visualize == True: 
-            anim = ps11_visualize.RobotVisualization(num_robots, width, height, delay=0.5) # start an animation of the room
+            anim = ps11_visualize.RobotVisualization(num_robots, width, height, 
+                        delay=0.5) # start an animation of the room
         room = RectangularRoom(width, height)
         num_tiles = room.getNumTiles()
         pct_cleaned = []
@@ -257,7 +258,8 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
                 robots.append(bot)
             if visualize == True: anim.update(room, robots) # update a new frame of the animation                
             for bot in robots: bot.updatePositionAndClean()    
-            pct_cleaned_afterCurTimeStep = room.getNumCleanedTiles() * 1.0 / num_tiles
+            pct_cleaned_afterCurTimeStep = \
+                                    room.getNumCleanedTiles() * 1.0 / num_tiles
             if pct_cleaned_afterCurTimeStep < min_coverage:
                 pct_cleaned.append(pct_cleaned_afterCurTimeStep)
             else: break
@@ -270,19 +272,26 @@ def test_Robot():
 
     temp = runSimulation(num_of_robots, speed, 5, 5, 1.0, 1, Robot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to completely clean a 5x5 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to completely clean a 5x5 room.'
 
-    temp = runSimulation(num_of_robots, speed, 10, 10, 0.75, num_of_trials, Robot, False)
+    temp = runSimulation(num_of_robots, speed, 10, 10, 0.75, num_of_trials, 
+                         Robot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to clean 75% of a 10x10 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to clean 75% of a 10x10 room.'
 
-    temp = runSimulation(num_of_robots, speed, 10, 10, 0.9, num_of_trials, Robot, False)
+    temp = runSimulation(num_of_robots, speed, 10, 10, 0.9, num_of_trials, 
+                         Robot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to clean 90% of a 10x10 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to clean 90% of a 10x10 room.'
 
-    temp = runSimulation(num_of_robots, speed, 20, 20, 1.0, num_of_trials, Robot, False)
+    temp = runSimulation(num_of_robots, speed, 20, 20, 1.0, num_of_trials, 
+                         Robot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to completely clean a 20x20 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to completely clean a 20x20 room.'
     
     
 # === Provided function
@@ -323,9 +332,12 @@ def showPlot1():
     num_of_robots = 1; speed = 1.0; min_coverage = 0.75; num_of_trials = 100;     
     for unit in range(5, 30, 5):
         w = h = unit
-        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, num_of_trials, Robot, False)
-        xVals.append(w*h); yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
-    pylab.title('Time to clean 75% of a room with one robot, for various room sizes (' + str(num_of_trials) + 'trials)')
+        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, 
+                             num_of_trials, Robot, False)
+        xVals.append(w*h) 
+        yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
+    pylab.title('Time to clean 75% of a room with one robot, ' + 
+                'for various room sizes (' + str(num_of_trials) + 'trials)')
     pylab.xlabel('area of the room')
     pylab.ylabel('time')
     pylab.plot(xVals, yVals, 'bo')
@@ -339,9 +351,12 @@ def showPlot2():
     xVals, yVals = [], []; 
     speed = 1.0; min_coverage = 0.75; num_of_trials = 100;     
     for num_of_robots in range(1, 10, 1):
-        temp = runSimulation(num_of_robots, speed, 25, 25, min_coverage, num_of_trials, Robot, False)
-        xVals.append(num_of_robots); yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
-    pylab.title('Time to clean 75% of a 25x25 room with different number of robots (' + str(num_of_trials) + 'trials)')
+        temp = runSimulation(num_of_robots, speed, 25, 25, min_coverage, 
+                             num_of_trials, Robot, False)
+        xVals.append(num_of_robots) 
+        yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
+    pylab.title('Time to clean 75% of a 25x25 room with different number ' + 
+                'of robots (' + str(num_of_trials) + 'trials)')
     pylab.xlabel('num_of_robots')
     pylab.ylabel('time')
     pylab.plot(xVals, yVals, 'bo')
@@ -357,9 +372,13 @@ def showPlot3():
     speed = 1.0; min_coverage = 0.75; num_of_trials = 500;     
     for item in [(20,20), (25,16), (40,10), (50,8), (80,5), (100,4)]:
         w, h = item
-        temp = runSimulation(2, speed, w, h, min_coverage, num_of_trials, Robot, False)
-        xVals.append(w*1.0/h); yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
-    pylab.title('Time to clean 75% of a room with two robots,\nfor same room size but different w/h ratios (' + str(num_of_trials) + 'trials)')
+        temp = runSimulation(2, speed, w, h, min_coverage, 
+                             num_of_trials, Robot, False)
+        xVals.append(w*1.0/h)
+        yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
+    pylab.title('Time to clean 75% of a room with two robots,\nfor same room' +
+                ' size but different w/h ratios (' 
+                + str(num_of_trials) + 'trials)')
     pylab.xlabel('width/height ratio')
     pylab.ylabel('time')
     pylab.plot(xVals, yVals, 'bo')
@@ -374,7 +393,8 @@ def showPlot4():
     """
     xVals = [x/10.0 for x in range(1,11,1)] 
     speed = 1.0; num_of_trials = 100;     
-    pylab.title('Time to clean various pct of a room with 1-5 robots, \nfor a 25x25 room (' + str(num_of_trials) + 'trials)')
+    pylab.title('Time to clean various pct of a room with 1-5 robots, ' + 
+                '\nfor a 25x25 room (' + str(num_of_trials) + 'trials)')
     pylab.xlabel('pct to be cleaned')
     pylab.ylabel('time')
     pylab.semilogy()
@@ -382,10 +402,12 @@ def showPlot4():
     for num_of_robots in range(1, 6, 1):
         yVals = []
         for min_coverage in xVals:
-            temp = runSimulation(num_of_robots, speed, 25, 25, min_coverage, num_of_trials, Robot, False)
+            temp = runSimulation(num_of_robots, speed, 25, 25, min_coverage, 
+                                 num_of_trials, Robot, False)
             yVals.append(sum([len(item) for item in temp]) / float(len(temp)))        
         curStyle = styleChoice.nextStyle()
-        pylab.plot(xVals, yVals, curStyle, label='num_of_robots:'+str(num_of_robots))
+        pylab.plot(xVals, yVals, curStyle, 
+                   label='num_of_robots:'+str(num_of_robots))
         pylab.legend(loc = 'best', numpoints=1)
     pylab.show()
 
@@ -423,21 +445,29 @@ class RandomWalkRobot(BaseRobot):
 def test_RandomWalkRobot():
     num_of_robots = 1; num_of_trials = 30; speed = 3.0    
 
-    temp = runSimulation(num_of_robots, speed, 5, 5, 1.0, 1, RandomWalkRobot, False)
+    temp = runSimulation(num_of_robots, speed, 5, 5, 1.0, 1, 
+                         RandomWalkRobot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to completely clean a 5x5 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to completely clean a 5x5 room.'
 
-    temp = runSimulation(num_of_robots, speed, 10, 10, 0.75, num_of_trials, RandomWalkRobot, False)
+    temp = runSimulation(num_of_robots, speed, 10, 10, 0.75, num_of_trials, 
+                         RandomWalkRobot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to clean 75% of a 10x10 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to clean 75% of a 10x10 room.'
 
-    temp = runSimulation(num_of_robots, speed, 10, 10, 0.9, num_of_trials, RandomWalkRobot, False)
+    temp = runSimulation(num_of_robots, speed, 10, 10, 0.9, num_of_trials, 
+                         RandomWalkRobot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to clean 90% of a 10x10 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to clean 90% of a 10x10 room.'
 
-    temp = runSimulation(num_of_robots, speed, 20, 20, 1.0, num_of_trials, RandomWalkRobot, False)
+    temp = runSimulation(num_of_robots, speed, 20, 20, 1.0, num_of_trials, 
+                         RandomWalkRobot, False)
     timeSteps = sum([len(item) for item in temp]) / len(temp)
-    print 'One robot takes around', timeSteps, 'clock ticks to completely clean a 20x20 room.'
+    print 'One robot takes around', timeSteps, \
+          'clock ticks to completely clean a 20x20 room.'
 
 
 # === Problem 6
@@ -451,11 +481,16 @@ def showPlot5():
     num_of_robots = 10; speed = 1.0; min_coverage = 1; num_of_trials = 100;     
     for unit in range(5, 60, 5):
         w = h = unit
-        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, num_of_trials, Robot, False)
-        xVals.append(w*h); Robot_yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
-        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, num_of_trials, RandomWalkRobot, False)
-        RandomWalkRobot_yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
-    pylab.title('Time to clean a room completely with one robot, for various room sizes (' + str(num_of_trials) + 'trials)')
+        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, 
+                             num_of_trials, Robot, False)
+        xVals.append(w*h)
+        Robot_yVals.append(sum([len(item) for item in temp]) / float(len(temp)))
+        temp = runSimulation(num_of_robots, speed, w, h, min_coverage, 
+                             num_of_trials, RandomWalkRobot, False)
+        RandomWalkRobot_yVals.append(sum([len(item) for item in temp]) 
+                                        / float(len(temp)))
+    pylab.title('Time to clean a room completely with one robot, ' + 
+                'for various room sizes (' + str(num_of_trials) + 'trials)')
     pylab.xlabel('area of the room')
     pylab.ylabel('time')
     pylab.plot(xVals, Robot_yVals, 'bo', label='Robot')

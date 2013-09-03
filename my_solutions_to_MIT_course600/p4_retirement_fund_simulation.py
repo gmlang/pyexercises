@@ -66,7 +66,6 @@ def testNestEggVariable():
     # [1000.0, 2040.0, 3142.0, 4142.0, 5266.2600000000002]
 
 
-
 #
 # Problem 3
 #
@@ -97,7 +96,6 @@ def testPostRetirement():
     # [80000.000000000015, 54000.000000000015, 24000.000000000015,
     # -4799.9999999999854, -34847.999999999985]
     
-    
 
 #
 # Problem 4
@@ -120,12 +118,14 @@ def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
     high = retirement_savings
     low = 0.0
     expenses_guess = (high + low) / 2
-    left = postRetirement(retirement_savings, postRetireGrowthRates, expenses_guess)[-1]
+    left = postRetirement(retirement_savings,
+                          postRetireGrowthRates, expenses_guess)[-1]
     while abs(left) > epsilon:
         if left > 0: low = expenses_guess
         else: high = expenses_guess
         expenses_guess = (high + low) / 2
-        left = postRetirement(retirement_savings, postRetireGrowthRates, expenses_guess)[-1]
+        left = postRetirement(retirement_savings, postRetireGrowthRates,
+                              expenses_guess)[-1]
     return expenses_guess
 
 def testFindMaxExpenses():
@@ -140,16 +140,11 @@ def testFindMaxExpenses():
     # Output should have a value close to:
     # 1229.95548986
 
-    
-    
-    
-    
 def main():
     testNestEggFixed()
     testNestEggVariable()
     testPostRetirement()
     testFindMaxExpenses()
-    
-    
+        
 if __name__ == '__main__':
     main()

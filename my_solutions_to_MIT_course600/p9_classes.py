@@ -59,11 +59,13 @@ class Triangle(Shape):
         """returns the area of the triangle"""
         return self.base * self.height / 2 
     def __str__(self):
-        return 'Triangle with base ' + str(self.base) + ' and height ' + str(self.height)
+        return 'Triangle with base ' + str(self.base) + ' and height ' +\
+                str(self.height)
     def __eq__(self, other):
         """Two triangles are equal if they have the same base and height.
         Other: object to check for equality"""
-        return type(other) == Triangle and self.base == other.base and self.height == other.height
+        return type(other) == Triangle and self.base == other.base and\
+               self.height == other.height
 
 def test_Triangle():
     t1 = Triangle(3, 4)

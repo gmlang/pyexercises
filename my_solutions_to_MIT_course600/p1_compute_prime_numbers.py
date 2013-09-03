@@ -1,5 +1,6 @@
 def print_primes(num):
-  """Find and print the num_th prime number and all primes before it, excluding 2"""
+  """Find and print the num_th prime number and all primes before it, 
+  excluding 2"""
   primes_cnt = 1 # 2 is the first prime
   n = 3
   while True:
@@ -16,15 +17,17 @@ def print_primes(num):
       n += 2
   return None
   
-# for sufficiently large n, the product of the primes less than n is 
-# less than or equal to e**n and that as n grows, and the ratio of the product 
-# of the primes to e**n gets close to 1 as n grows. Though the convergence is not monotonic.
-# check this by taking log on both sides
+# for sufficiently large n, the product of the primes less than n is less than
+# or equal to e**n and that as n grows, and the ratio of the product of the 
+# primes to e**n gets close to 1 as n grows. Though the convergence is not 
+# monotonic. check this by taking log on both sides
 
 def is_odd(n):
   """return True if n is odd; False if n is even"""
-  if n % 2 == 0: return False
-  else: return True
+  if n % 2 == 0: 
+    return False
+  else: 
+    return True
 
 def is_prime(n):
   """return True if n is prime; False if n is not"""

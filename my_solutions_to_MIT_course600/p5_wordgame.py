@@ -9,7 +9,9 @@ CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 
+    's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
 # -----------------------------------
@@ -226,7 +228,8 @@ def play_hand(hand, word_list):
             display_hand(hand)
             userInput = raw_input('Enter another word: ')
         else:
-            userInput = raw_input('You entered an invalid word. Please enter a new word: ')
+            userInput = raw_input('You entered an invalid word. ' + 
+                                  'Please enter a new word: ')
     print 'The hand finishes, and your total score is ', total_score
 
 #
@@ -255,7 +258,8 @@ def play_game(word_list):
     ## uncomment the following block of code once you've completed Problem #4
     hand = deal_hand(HAND_SIZE) # random init
     while True:
-       cmd = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+       cmd = raw_input('Enter n to deal a new hand, r to replay the last' +
+                       'hand, or e to end game: ')
        if cmd == 'n':
            hand = deal_hand(HAND_SIZE)
            play_hand(hand.copy(), word_list)

@@ -11,11 +11,11 @@ def cat_bytes(filename):
     ############
     # choice 1 #
     ############
-    # # reads one line at a time 
-    # # has the nice quality that not all the file needs to fit in memory at one time
-    # # only works for text files, not binary files
-    # for line in f: 
-      # print line,
+    # reads one line at a time 
+    # has the nice quality that not all the file needs to fit in memory at one time
+    # only works for text files, not binary files
+    for line in f: 
+      print line,
     
     ############
     # choice 2 #
@@ -28,8 +28,8 @@ def cat_bytes(filename):
     # choice 3 #
     ############
     # # reads the whole file into a single string
-    text = f.read()
-    print text,
+    # text = f.read()
+    # print text,
     
     f.close()
   except IOError:
@@ -52,8 +52,8 @@ def cat_unicode(filename):
     # choice 3
     text = f.read()
     print text,
-    
     f.close()
+    
   except IOError:
     # print 'IO Error', filename
     raise ValueError("couldn't open " + filename)

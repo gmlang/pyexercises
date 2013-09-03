@@ -27,8 +27,10 @@ while True:
         if 6*a+9*b+20*c == n:
           cant_buy = False
           break        
-  if cant_buy: nums_cant_buy.append(n)
-  else: nums_can_buy.append(n)
+  if cant_buy: 
+    nums_cant_buy.append(n)
+  else: 
+    nums_can_buy.append(n)
   print n, nums_cant_buy, nums_can_buy
   
   # When found six consecutive values of n that in fact pass the test of having 
@@ -45,7 +47,8 @@ while True:
       else:
         is_consecutive = False
     if is_consecutive:
-      print "Largest number of McNuggets that cannot be bought in exact quantity: %d" %nums_cant_buy[-1]
+      print "Largest number of McNuggets that cannot be bought in \
+             exact quantity: %d" %nums_cant_buy[-1]
       sys.exit(0)  # a clean exit without any problem/error
   # Don't forget to increment n by 1
   n += 1 

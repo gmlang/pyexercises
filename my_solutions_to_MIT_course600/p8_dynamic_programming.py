@@ -103,11 +103,14 @@ def greedyAdvisor(subjects, maxWork, comparator):
     if len(subjects) == 0:
         return 'Empty SubjectList'
     if comparator is cmpValue:
-        subNames = sorted(subjects, key=lambda k: subjects[k][VALUE], reverse=True)
+        subNames = sorted(subjects, key=lambda k: subjects[k][VALUE], 
+                          reverse=True)
     if comparator is cmpWork:
         subNames = sorted(subjects, key=lambda k: subjects[k][WORK])
     if comparator is cmpRatio:
-        subNames = sorted(subjects, key=lambda k: float(subjects[k][VALUE]) / subjects[k][WORK], reverse=True)
+        subNames = sorted(subjects, 
+                          key=lambda k: float(subjects[k][VALUE])/subjects[k][WORK], 
+                          reverse=True)
     selected = {}
     i, totalVal, totalWork = 0, 0, 0
     while totalWork < maxWork and i < len(subNames):
@@ -151,14 +154,15 @@ def bruteForceAdvisor(subjects, maxWork):
     nameList = subjects.keys()
     tupleList = subjects.values()
     bestSubset, bestSubsetValue = \
-            bruteForceAdvisorHelper(subjects, nameList, maxWork, 0, None, None, [], 0, 0)
+        bruteForceAdvisorHelper(subjects, nameList, maxWork, 0, None, None, 
+                                [], 0, 0)
     outputSubjects = {}
     for i in bestSubset:
         outputSubjects[nameList[i]] = tupleList[i]
     return outputSubjects
 
-def bruteForceAdvisorHelper(subjects, nameList, maxWork, i, bestSubset, bestSubsetValue,
-                            subset, subsetValue, subsetWork):
+def bruteForceAdvisorHelper(subjects, nameList, maxWork, i, bestSubset, 
+                            bestSubsetValue, subset, subsetValue, subsetWork):
     # Hit the end of the list.
     if i >= len(subjects):
         if bestSubset == None or subsetValue > bestSubsetValue:
@@ -172,13 +176,16 @@ def bruteForceAdvisorHelper(subjects, nameList, maxWork, i, bestSubset, bestSubs
         # Try including subjects[i] in the current working subset.
         if subsetWork + s[WORK] <= maxWork:
             subset.append(i)
-            bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects, nameList,
-                    maxWork, i+1, bestSubset, bestSubsetValue, subset,
-                    subsetValue + s[VALUE], subsetWork + s[WORK])
+            bestSubset, bestSubsetValue = \
+                bruteForceAdvisorHelper(subjects, nameList, maxWork, i+1, 
+                                        bestSubset, bestSubsetValue, subset,
+                                        subsetValue + s[VALUE], 
+                                        subsetWork + s[WORK])
             subset.pop()
-        bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects, nameList,
-                maxWork, i+1, bestSubset, bestSubsetValue, subset,
-                subsetValue, subsetWork)
+        bestSubset, bestSubsetValue = \
+            bruteForceAdvisorHelper(subjects, nameList, maxWork, i+1, 
+                                    bestSubset, bestSubsetValue, subset,
+                                    subsetValue, subsetWork)
         return bestSubset, bestSubsetValue
 
 #
@@ -224,9 +231,11 @@ def fastMaxVal(toConsider, tupleList, avail, memo = {}):
     else:
         s = toConsider[0]
         curr_work, curr_value = tupleList[0][WORK], tupleList[0][VALUE]
-        withVal, withToTake = fastMaxVal(toConsider[1:], tupleList[1:], avail - curr_work, memo)
+        withVal, withToTake = fastMaxVal(toConsider[1:], tupleList[1:], 
+                                         avail - curr_work, memo)
         withVal += curr_value
-        withoutVal, withoutToTake = fastMaxVal(toConsider[1:], tupleList[1:], avail, memo)
+        withoutVal, withoutToTake = fastMaxVal(toConsider[1:], tupleList[1:], 
+                                               avail, memo)
         if withVal > withoutVal:
             result = (withVal, withToTake + (s,))
         else:

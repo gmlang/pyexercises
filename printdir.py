@@ -13,7 +13,7 @@ def printdir(dir):
     print os.path.abspath(path)
 
 def main():
-    printdir(sys.argv[1])
+  printdir(sys.argv[1])
     
 if __name__ == '__main__':
-    main()
+  main()

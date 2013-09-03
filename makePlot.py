@@ -9,10 +9,11 @@ def makePlot(xVals, yVals, title, xLabel, yLabel, style,
     pylab.xlabel(xLabel)
     pylab.ylabel(yLabel)
     ## add text
-    xmin, xmax = pylab.xlim() # returns a tuple of the minimal and maximal vals of the x-axis of the current figure
+    xmin, xmax = pylab.xlim() # returns a tuple of the minimal and maximal
+                              # vals of the x-axis of the current figure
     ymin, ymax = pylab.ylim()
     pylab.text(xmin + (xmax-xmin)*0.02, (ymax-ymin)/2, 
-               'Mean = ' + str(0) + '\nSD = ' + str(1)) # can be changed to suit a new application
+               'Mean = ' + str(0) + '\nSD = ' + str(1))
     ## if use log scaled axises
     if logX:
         pylab.semilogx()

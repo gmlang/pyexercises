@@ -10,7 +10,9 @@ CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 
+    's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
 # -----------------------------------
@@ -19,11 +21,11 @@ SCRABBLE_LETTER_VALUES = {
 WORDLIST_FILENAME = "words.txt"
 
 def load_words():
-    """
-    Returns a list of valid words. Words are strings of lowercase letters.
+    """ Returns a list of valid words. Words are strings of lowercase letters.
     
     Depending on the size of the word list, this function may
     take a while to finish.
+    
     """
     print "Loading word list from file..."
     # inFile: file
@@ -36,9 +38,11 @@ def load_words():
     return wordlist
 
 def sorted_letters(lst):
-    """
+    """returns a list of strings, where each string is made by joining a 
+    subset of lst.
+    
     lst: list
-    returns a list of strings, where each string is made by joining a subset of lst
+    
     """
     result = [[]]
     for x in lst:
@@ -50,9 +54,7 @@ def sorted_letters(lst):
 # -----------------------------------
 
 def get_words_to_points(word_list):
-    """
-    Return a dict that maps every word in word_list to its point value.
-    """
+    """Return a dict that maps every word in word_list to its point value."""
     word_points = {}
     for word in word_list:
         score = 0.0
@@ -64,12 +66,13 @@ def get_words_to_points(word_list):
     return word_points
 
 def get_word_rearrangements(word_list):
-    """
-    for word in word_list, sort the letters in word and make them a string called
-    sorted_letters. Returns a dictionary d, where d[sorted_letters] = word
+    """For word in word_list, sort the letters in word and make them a string 
+    called sorted_letters. Returns a dictionary d, where 
+    d[sorted_letters] = word
     
     word_list: list of strings
     return: dict (string -> string)
+    
     """
     d = {}
     for word in word_list:
@@ -83,11 +86,10 @@ def get_word_rearrangements(word_list):
 
     
 def get_time_limit(points_dict, k):
-    """
-    Return the time limit for the computer player as a function of the
-    multiplier k.
-    points_dict should be the same dictionary that is created by
+    """Return the time limit for the computer player as a function of the
+    multiplier k. points_dict should be the same dictionary that is created by
     get_words_to_points.
+    
     """
     start_time = time.time()
     # Do some computation. The only purpose of the computation is so we can
@@ -98,8 +100,7 @@ def get_time_limit(points_dict, k):
     return (end_time - start_time) * k    
 
 def display_hand(hand):
-    """
-    Displays the letters currently in the hand.
+    """Displays the letters currently in the hand.
 
     For example:
        display_hand({'a':1, 'x':2, 'l':3, 'e':1})
@@ -108,6 +109,7 @@ def display_hand(hand):
     The order of the letters is unimportant.
 
     hand: dictionary (string -> int)
+    
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
@@ -115,16 +117,15 @@ def display_hand(hand):
     print                              # print an empty line
 
 def deal_hand(n):
-    """
-    Returns a random hand containing n lowercase letters.
-    At least n/3 the letters in the hand should be VOWELS.
+    """Returns a random hand containing n lowercase letters. At least n/3 the 
+    letters in the hand should be VOWELS.
 
-    Hands are represented as dictionaries. The keys are
-    letters and the values are the number of times the
-    particular letter is repeated in that hand.
+    Hands are represented as dictionaries. The keys are letters and the values 
+    are the number of times the particular letter is repeated in that hand.
 
     n: int >= 0
     returns: dictionary (string -> int)
+    
     """
     hand={}
     num_vowels = n / 3
@@ -139,11 +140,9 @@ def deal_hand(n):
     return hand
 
 def update_hand(hand, word):
-    """
-    Assumes that 'hand' has all the letters in word.
-    In other words, this assumes that however many times
-    a letter appears in 'word', 'hand' has at least as
-    many of that letter in it. 
+    """Assumes that 'hand' has all the letters in word. In other words, this 
+    assumes that however many times a letter appears in 'word', 'hand' has at 
+    least as many of that letter in it. 
 
     Updates the hand: uses up the letters in the given word
     and returns the new hand, without those letters in it.
@@ -153,6 +152,7 @@ def update_hand(hand, word):
     word: string
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
+    
     """
     left_in_hand = hand.copy()
     for letter in word:
@@ -161,10 +161,9 @@ def update_hand(hand, word):
     
     
 def pick_best_word(hand, points_dict):
-    """
-    Return the highest scoring word from points_dict that can be made with the
-    given hand.
-    Return '.' if no words can be made with the given hand.
+    """ Return the highest scoring word from points_dict that can be made with 
+    the given hand. Return '.' if no words can be made with the given hand.
+    
     """    
     temp_list = []
     for letter in hand:
@@ -189,10 +188,9 @@ def pick_best_word(hand, points_dict):
     return best_word
 
 def pick_best_word_faster(hand, points_dict, rearrange_dict):
-    """
-    Return the highest scoring word from rearrange_dict that can be made with the
-    given hand.
-    Return '.' if no words can be made with the given hand.
+    """Return the highest scoring word from rearrange_dict that can be made 
+    with the given hand. Return '.' if no words can be made with the given hand.
+    
     """    
     temp_list = []
     for letter in hand:
@@ -216,8 +214,7 @@ def pick_best_word_faster(hand, points_dict, rearrange_dict):
 # Problem #4: Playing a hand
 #
 def play_hand(hand, points_dict, rearrage_dict):
-    """
-    Allows the user to play the given hand, as follows:
+    """Allows the user to play the given hand, as follows:
 
     * The hand is displayed.
     
@@ -243,6 +240,7 @@ def play_hand(hand, points_dict, rearrage_dict):
       hand: dictionary (string -> int)
       points_dict: dict (string -> int) (word -> points)
       rearrange_dict: dict (string -> string) (sorted letters -> word)
+    
     """
     
     time_limit = get_time_limit(points_dict, 100) # computer play
@@ -307,7 +305,8 @@ def play_game(points_dict, rearrange_dict):
     ## uncomment the following block of code once you've completed Problem #4
     hand = deal_hand(HAND_SIZE) # random init
     while True:
-       cmd = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+       cmd = raw_input('Enter n to deal a new hand, r to replay the last ' + 
+                       'hand, or e to end game: ')
        if cmd == 'n':
            hand = deal_hand(HAND_SIZE)
            play_hand(hand.copy(), points_dict, rearrange_dict)

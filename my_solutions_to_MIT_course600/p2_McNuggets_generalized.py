@@ -15,8 +15,10 @@ for n in range(1, 150):   # only search for solutions up to size 150
         if packages[0]*a + packages[1]*b + packages[2]*c == n:
           cant_buy = False
           break        
-  if cant_buy: bestSoFar = n
-  else: nums_can_buy.append(n)
+  if cant_buy: 
+    bestSoFar = n
+  else: 
+    nums_can_buy.append(n)
   print n, bestSoFar, nums_can_buy
   
   if len(nums_can_buy) >= 6: 
