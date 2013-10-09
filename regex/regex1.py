@@ -1,3 +1,5 @@
+### this program shows how to remove repeating vowels using regular expression
+
 import re
 
 s1 = 'cabaceo'

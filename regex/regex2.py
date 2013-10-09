@@ -1,14 +1,15 @@
+### this program demos the functionality of () and \1 as regular expressions 
+
 import re
 
 s = '''And the first one now will later be last
 For the times they are a-changin'''
 
-# demo ()
-# match matches from the beginning of the string, only return one matchObject
+# .match matches from the beginning of the string, only return one matchObject
 # .groups() => a tuple of matched items
 # .group(0) => matched substring
-# .group(1) => first matched item specified by the 1st pair of parentheses in the pattern
-# .group(2) => second matched item specified by the 2nd pair of parentheses in the pattern
+# .group(1) => the 1st matched item specified by the 1st pair of parentheses in the pattern
+# .group(2) => the 2nd matched item specified by the 2nd pair of parentheses in the pattern
 
 pattern = r'(And)( )(the)'
 re.compile(pattern).match(s).groups() # ('And', ' ', 'the')
@@ -21,9 +22,8 @@ re.compile(pattern).sub(r'\2', s) # ' first one now will later be last\nFor the 
 re.compile(pattern).sub(r'\3', s) # 'the first one now will later be last\nFor the times they are a-changin'
 
 s3 = 'caabaaceeoo'
-# demo ()
-# search matches anywhere within the string, only return one matchObject
 
+# .search matches anywhere within the string, only return one matchObject
 pat = r'(a)(b)(a)'
 re.search(pat, s1).groups() # ('a', 'b', 'a')
 re.search(pat, s1).group(0) # 'aba'
